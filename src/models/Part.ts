@@ -80,14 +80,14 @@ export async function findCarParts(brand: string) {
   }
 }
 
-export async function createCarParts() {
+export async function createCarParts(brand: string, name: string) {
   try {
     const newPart = await prisma.car.create({
       data: {
-        name: "Accord",
+        name,
         brand: {
           create: {
-            name: "Honda",
+            name: brand,
           },
         },
         partCategory: {

@@ -1,7 +1,7 @@
-import { Request, Response, NextFunction, ErrorRequestHandler } from 'express';
+import { Request, Response, NextFunction, ErrorRequestHandler } from "express";
 
 export function errorNotFound(req: Request, res: Response, next: NextFunction) {
-  res.status(404).json({ error: 'Page not found' });
+  res.status(404).json({ error: "Page not found" });
 }
 
 export function catchErrors(
@@ -10,5 +10,5 @@ export function catchErrors(
   res: Response,
   next: NextFunction
 ) {
-  res.status(500).json({ error: 'Error encountered!' });
+  res.status(500).json({ error: error });
 }

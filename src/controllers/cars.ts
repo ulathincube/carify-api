@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { matchedData, param, validationResult } from "express-validator";
+import { body, matchedData, param, validationResult } from "express-validator";
 import {
   findCarParts,
   createCarParts,
@@ -89,15 +89,31 @@ export async function getAllCarParts(
   }
 }
 
-export async function createCarPartsDB(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
-  try {
-    const data = await createCarParts();
-    res.json({ data, error: null });
-  } catch (error) {
-    next(error);
-  }
-}
+export const createCarPartsDB = [
+  body("carBrand")
+    .trim()
+    .notEmpty()
+    .escape()
+    .withMessage("Please provide a car brand"),
+  body("carName")
+    .trim()
+    .notEmpty()
+    .escape()
+    .withMessage("Please provide a car name"),
+  async function createCarPartsDB(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) throw errors.array();
+
+    const { carBrand, carName } = matchedData(req);
+    try {
+      const data = await createCarParts(carBrand, carName);
+      res.json({ data, error: null });
+    } catch (error) {
+      next(error);
+    }
+  },
+];
