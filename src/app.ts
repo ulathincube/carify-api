@@ -1,13 +1,13 @@
 import express from "express";
 import "dotenv/config";
-import authenticate from "./middlewares/auth";
-import indexRoute from "./routes/index";
-import carsRoute from "./routes/cars";
-import userRoute from "./routes/user";
-import authRoute from "./routes/auth";
-import { catchErrors, errorNotFound } from "./errors/errors";
-import "./config/passport-jwt";
-import "./config/passport-local";
+import authenticate from "./middlewares/auth.js";
+import indexRoute from "./routes/index.js";
+import carsRoute from "./routes/cars.js";
+import userRoute from "./routes/user.js";
+import authRoute from "./routes/auth.js";
+import { catchErrors, errorNotFound } from "./errors/errors.js";
+import "./config/passport-jwt.js";
+import "./config/passport-local.js";
 import cors from "cors";
 
 const app = express();
