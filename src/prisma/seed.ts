@@ -1,93 +1,27 @@
 import prisma from "../config/prisma";
 
-export async function getCarBrands() {
-  try {
-    const result = await prisma.carBrand.findMany();
-    return result;
-  } catch (error) {
-    throw error;
-  }
-}
+type Cars = { brand: string; name: string }[];
 
-export async function getCarsByBrandName(brand: string) {
-  try {
-    const carsByBrand = await prisma.carBrand.findMany({
-      where: {
-        name: brand,
-      },
-      include: {
-        cars: true,
-      },
-    });
+const carsArray: Cars = [
+  { brand: "Toyota", name: "Hilux" },
+  { brand: "Isuzu", name: "KB 250" },
+  { brand: "Isuzu", name: "KB 300" },
+  { brand: "VW", name: "Polo" },
+  { brand: "BMW", name: "E46" },
+  { brand: "Honda", name: "Accord" },
+  { brand: "Honda", name: "Jazz" },
+  { brand: "Ford", name: "Raptor" },
+  { brand: "Nissan", name: "Sunny" },
+];
 
-    return carsByBrand;
-  } catch (error) {
-    throw error;
-  }
-}
-export async function getCarsByBrandId(brandId: number) {
-  try {
-    const carsByBrand = await prisma.carBrand.findMany({
-      where: {
-        id: brandId,
-      },
-      include: {
-        cars: true,
-      },
-    });
-  } catch (error) {
-    throw error;
-  }
-}
-
-export async function getCar(name: string) {
-  try {
-    const car = await prisma.car.findUnique({
-      where: {
-        name: name,
-      },
-      include: {
-        partCategory: {
-          include: {
-            part: true,
-          },
-        },
-      },
-    });
-
-    return car;
-  } catch (error) {
-    throw error;
-  }
-}
-
-export async function findCarParts(brand: string) {
-  try {
-    const result = await prisma.car.findMany({
-      include: {
-        brand: true,
-        partCategory: {
-          include: {
-            part: true,
-          },
-        },
-      },
-    });
-
-    return result;
-  } catch (error) {
-    throw error;
-  }
-}
-
-export async function createCarParts(brand: string, name: string) {
+async function main(car: { brand: string; name: string }) {
   try {
     const newCar = await prisma.car.create({
       data: {
-        name,
+        name: car.name,
         brand: {
           create: {
-            name: brand,
+            name: car.brand,
           },
         },
         partCategory: {
@@ -148,9 +82,9 @@ export async function createCarParts(brand: string, name: string) {
         partCategory: true,
       },
     });
-
-    return newCar;
   } catch (error) {
     throw error;
   }
 }
+
+main({ brand: "Honda", name: "Jazz" });
