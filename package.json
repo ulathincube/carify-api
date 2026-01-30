@@ -7,7 +7,7 @@
   "scripts": {
     "start:dev": "npx tsx --watch ./src/app.ts",
     "start": "npm install && node ./dist/app.js",
-    "build": "npx tsc"
+    "build": "npx prisma generate && npx tsc"
   },
   "keywords": [],
   "author": "",

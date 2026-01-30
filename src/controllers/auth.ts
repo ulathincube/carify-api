@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import passport from "passport";
 import jwt from "jsonwebtoken";
-import { emailCheck, passwordCheck } from "../utils/validate";
+import { emailCheck, passwordCheck } from "../utils/validate.js";
 import bcrypt from "bcryptjs";
 import { matchedData, validationResult } from "express-validator";
 

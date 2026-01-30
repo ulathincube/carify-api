@@ -7,7 +7,7 @@
 
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
-    "module": "commonjs",
+    "module": "nodenext",
     "target": "es2023",
     "lib": ["es2023"],
     "types": [],
@@ -21,7 +21,7 @@
     "declaration": true,
     "declarationMap": true,
     "esModuleInterop": true,
-    "moduleResolution": "node",
+    "moduleResolution": "nodenext",
 
     // Stricter Typechecking Options
     "noUncheckedIndexedAccess": true,

@@ -7,7 +7,7 @@ import {
   getCarsByBrandName,
   getCarsByBrandId,
   getCar,
-} from "../models/Part";
+} from "../models/Part.js";
 
 const carBrandValidate = param("carBrand")
   .trim()

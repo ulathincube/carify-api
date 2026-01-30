@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
-import { createUser } from "../models/User";
+import { createUser } from "../models/User.js";
 import { matchedData, validationResult } from "express-validator";
-import { hashPassword } from "../utils/hash";
-import { nameCheck, emailCheck, passwordCheck } from "../utils/validate";
+import { hashPassword } from "../utils/hash.js";
+import { nameCheck, emailCheck, passwordCheck } from "../utils/validate.js";
 
 async function createUserAcc(req: Request, res: Response, next: NextFunction) {
   try {

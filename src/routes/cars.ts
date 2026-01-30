@@ -5,7 +5,7 @@ import {
   getAllCarBrands,
   getCarsByBrand,
   getOneCar,
-} from "../controllers/cars";
+} from "../controllers/cars.js";
 
 const router = Router();
 
