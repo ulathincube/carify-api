@@ -40,13 +40,17 @@ export async function getCarsByBrandId(brandId: number) {
   }
 }
 
-export async function getCar(name: string) {
+export async function getCar(brand: string, name: string) {
   try {
     const car = await prisma.car.findUnique({
       where: {
         name: name,
+        brand: {
+          name: brand,
+        },
       },
       include: {
+        brand: true,
         partCategory: {
           include: {
             part: true,
@@ -54,6 +58,8 @@ export async function getCar(name: string) {
         },
       },
     });
+
+    console.log(car);
 
     return car;
   } catch (error) {

@@ -53,6 +53,11 @@ export const getCarsByBrand = [
 ];
 
 export const getOneCar = [
+  param("carBrand")
+    .trim()
+    .notEmpty()
+    .escape()
+    .withMessage("Please provide a valid car brand"),
   param("carName")
     .trim()
     .notEmpty()
@@ -61,9 +66,11 @@ export const getOneCar = [
   async function getOneCar(req: Request, res: Response, next: NextFunction) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) throw errors.array();
-    const { carName } = matchedData(req);
+    const { carName, carBrand } = matchedData(req);
+
     try {
-      const car = await getCar(carName);
+      const car = await getCar(carBrand, carName);
+
       res.status(200).json(car);
     } catch (error) {
       next(error);
